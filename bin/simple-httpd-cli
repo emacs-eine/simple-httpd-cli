@@ -1,0 +1,82 @@
+#!/bin/sh
+:;#-*-Emacs-Lisp-*-
+
+:;test -n "$EMACS" || EMACS=emacs
+:;test -n "$EASK_EMACS" && EMACS=$EASK_EMACS
+:;exec "$EMACS" -batch -Q -l "$0" -- "$@"
+
+;;; simple-httpd-cli --- A command-line interface for simple-httpd  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2026  Shen, Jen-Chieh
+
+;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
+;; Maintainer: Shen, Jen-Chieh <jcs090218@gmail.com>
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+;;
+;; The command-line interface.
+;;
+
+;;; Code:
+
+(require 'simple-httpd-cli)
+(require 'commander)
+(require 'pp)
+
+(defvar simple-httpd-root default-directory)
+(defvar simple-httpd-host "localhost")
+(defvar simple-httpd-port httpd-port)
+(defvar simple-httpd-ip-family httpd-ip-family)
+
+(defun simple-httpd-cli--set-host (arg)
+  "Set the host."
+  (setq simple-httpd-host arg))
+
+(defun simple-httpd-cli--set-port (arg)
+  "Set the port."
+  (setq simple-httpd-port (string-to-number arg)))
+
+(defun simple-httpd-cli--set-ip-family (arg)
+  "Set the IP family."
+  (setq simple-httpd-ip-family arg))
+
+(defun simple-httpd-cli--run (&rest args)
+  "Run the simple http server."
+  (simple-httpd-cli-start (or (car args) simple-httpd-root)
+                          simple-httpd-host
+                          simple-httpd-port
+                          simple-httpd-ip-family))
+
+(commander
+ (name "simple-httpd-cli")
+ (description "A command-line interface for simple-httpd")
+ (default simple-httpd-cli--run)
+ (option "--help, -h" "Show usage information and exit" commander-print-usage-and-exit)
+
+ (command "run [path]"
+          "Translate the text and output to standard output."
+          simple-httpd-cli--run)
+
+ (option "--host <host>, -h <host>"
+         simple-httpd-cli--set-host)
+ (option "--port <port>, -p <port>"
+         simple-httpd-cli--set-port)
+ (option "--ip-family <ip-family>"
+         simple-httpd-cli--set-ip-family))
+
+;;; simple-httpd-cli ends here
