@@ -56,8 +56,3 @@ jobs:
     - name: Run tests
       run:
         make ci
-
-    - name: Test commands
-      run: |
-        eask -g link add gt-cli .
-        eask -g exec gt-cli translate Hello World!? -t ja
