@@ -14,6 +14,7 @@
 
 (source 'gnu)
 (source 'melpa)
+(source 'jcs-elpa)
 
 (depends-on "emacs" "26.1")
 (depends-on "simple-httpd")
