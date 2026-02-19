@@ -56,7 +56,7 @@
          (httpd-host (or host httpd-host))
          (httpd-port (or port httpd-port))
          (httpd-ip-family (or ip-family httpd-ip-family)))
-    (message "Starting up http-server, serving `%s'" httpd-root)
+    (message "Starting up http-server, serving `%s'" (expand-file-name httpd-root))
     (message "")
     (message "simple-httpd version: %s" (simple-httpd-cli--version))
     (message "")
