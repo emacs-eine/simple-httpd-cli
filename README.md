@@ -15,7 +15,7 @@ A command-line interface for simple-httpd
 
 COMMANDS:
 
- run [path]                        Translate the text and output to standard output.
+ run [path]                        Run the simple http server.
 
 OPTIONS:
 

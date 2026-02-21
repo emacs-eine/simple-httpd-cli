@@ -69,7 +69,7 @@
  (option "--help, -h" "Show usage information and exit" commander-print-usage-and-exit)
 
  (command "run [path]"
-          "Translate the text and output to standard output."
+          "Run the simple http server."
           simple-httpd-cli--run)
 
  (option "--host <host>, -h <host>"
