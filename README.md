@@ -33,6 +33,7 @@ You need to add this line to your Eask file (global recommanded).
 (source 'gnu)
 (source 'melpa)
 (source 'jcs-elpa)
+(source 'eine)
 ```
 
 Then, install it:
