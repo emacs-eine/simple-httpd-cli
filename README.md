@@ -27,7 +27,7 @@ OPTIONS:
 
 ## 💾 Installation
 
-You need to add this line to your Eask file (global recommanded).
+You need to add this line to your Eask file (global recommended).
 
 ```elisp
 (source 'gnu)
